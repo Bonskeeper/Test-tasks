@@ -1,0 +1,94 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="test_form_view">
+            <field name="name">test.form</field>
+            <field name="model">test.test</field>
+            <field name="arch" type="xml">
+                <form string="Test Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="test_purpose"/>
+			    <field name="tester"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- window action -->
+        <!--
+            The following tag is an action definition for a "window action",
+            that is an action opening a view or a set of views
+        -->
+        <record model="ir.actions.act_window" id="test_list_action">
+            <field name="name">Tests</field>
+            <field name="res_model">test.test</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first test
+                </p>
+            </field>
+        </record>
+
+        <!-- top level menu: no parent -->
+        <menuitem id="main_test_menu" name="Test from Denys"/>
+        <!-- A first level in the left side menu is needed
+             before using action= attribute -->
+        <menuitem id="test_menu" name="Test"
+                  parent="main_test_menu"/>
+        <!-- the following menuitem should appear *after*
+             its parent openacademy_menu and *after* its
+             action course_list_action -->
+        <menuitem id="tests_menu" name="Tests" parent="test_menu"
+                  action="test_list_action"/>
+        <!-- Full id location:
+             action="openacademy.course_list_action"
+             It is not required when it is the same module -->
+
+
+        <!-- test_session form view -->
+        <record model="ir.ui.view" id="test_session_form_view">
+            <field name="name">test_session.form</field>
+            <field name="model">test.test_session</field>
+            <field name="arch" type="xml">
+                <form string="Test Session Form">
+                    <sheet>
+                        <group>
+			    <field name="name"/>
+                            <field name="test"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="duration"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- test_session tree/list view -->
+        <record model="ir.ui.view" id="session_tree_view">
+            <field name="name">test_session.tree</field>
+            <field name="model">test.test_session</field>
+            <field name="arch" type="xml">
+                <tree string="Test Session Tree">
+                    <field name="name"/>
+                    <field name="test"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="test_session_list_action">
+            <field name="name">Test Session</field>
+            <field name="res_model">test.test_session</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="test_session_menu" name="Test Session"
+                  parent="test_menu"
+                  action="test_session_list_action"/>
+
+    </data>
+</odoo>
+
